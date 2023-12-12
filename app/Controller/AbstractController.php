@@ -19,12 +19,11 @@ use Psr\Container\ContainerInterface;
 
 abstract class AbstractController
 {
-    #[Inject]
-    protected ContainerInterface $container;
-
-    #[Inject]
-    protected RequestInterface $request;
-
-    #[Inject]
-    protected ResponseInterface $response;
+    public function __construct(
+        protected ResponseInterface $response,
+        protected RequestInterface $request,
+        protected ContainerInterface $container
+    )
+    {
+    }
 }
