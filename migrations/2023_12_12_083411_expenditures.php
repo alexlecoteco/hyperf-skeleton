@@ -4,17 +4,19 @@ use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class Expenditures extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::table('expenditure', function (Blueprint $table) {
+            // Inserir o User id como FK
+            // Inserir o company id como FK
             $table->uuid('id')->primary()->unique();
-            $table->string('name');
-            $table->string('email');
+            $table->string('description');
+            $table->integer('value');
             $table->timestamps();
         });
     }
@@ -24,6 +26,8 @@ class CreateUsersTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('expenditure', function (Blueprint $table) {
+            $table->drop();
+        });
     }
 }
