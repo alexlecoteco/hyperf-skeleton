@@ -12,8 +12,10 @@ class Expenditures extends Migration
     public function up(): void
     {
         Schema::table('expenditure', function (Blueprint $table) {
-            // Inserir o User id como FK
-            // Inserir o company id como FK
+            $table->uuid('company_id');
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->uuid('user_id');
+            $table->foreign('users')->references('id')->on('users');
             $table->uuid('id')->primary()->unique();
             $table->string('description');
             $table->integer('value');
