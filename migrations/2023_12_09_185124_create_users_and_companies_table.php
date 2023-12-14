@@ -11,7 +11,7 @@ class CreateUsersAndCompaniesTable extends Migration
      */
     public function up(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
             $table->string('fantasy_name');
             $table->string('legal_name')->unique();

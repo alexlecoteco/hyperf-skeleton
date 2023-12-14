@@ -11,11 +11,11 @@ class Expenditures extends Migration
      */
     public function up(): void
     {
-        Schema::table('expenditure', function (Blueprint $table) {
+        Schema::create('expenditures', function (Blueprint $table) {
             $table->uuid('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->uuid('user_id');
-            $table->foreign('users')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->uuid('id')->primary()->unique();
             $table->string('description');
             $table->integer('value');
@@ -28,8 +28,6 @@ class Expenditures extends Migration
      */
     public function down(): void
     {
-        Schema::table('expenditure', function (Blueprint $table) {
-            $table->drop();
-        });
+        Schema::dropIfExists('expenditures');
     }
 }
