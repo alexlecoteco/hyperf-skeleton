@@ -12,7 +12,7 @@ class CreateUsersAndCompaniesTable extends Migration
     public function up(): void
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
+            $table->bigIncrements('id');
             $table->string('fantasy_name');
             $table->string('legal_name')->unique();
             $table->string('document')->unique();
@@ -20,11 +20,12 @@ class CreateUsersAndCompaniesTable extends Migration
         });
 
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
-            $table->uuid('company_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('name');
             $table->string('email');
+            $table->string('document')->unique();
             $table->timestamps();
         });
     }
@@ -34,7 +35,7 @@ class CreateUsersAndCompaniesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('companies');
     }
 }
